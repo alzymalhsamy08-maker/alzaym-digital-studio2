@@ -502,44 +502,75 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   if (clientForm) {
-    clientForm.addEventListener("submit", function (event) {
-      event.preventDefault();
+  clientForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-      const name = document.getElementById("name");
-      const phone = document.getElementById("phone");
-      const service = document.getElementById("service");
-      const budget = document.getElementById("budget");
-      const details = document.getElementById("details");
+    const name = document.getElementById("name");
+    const phone = document.getElementById("phone");
+    const service = document.getElementById("service");
+    const budget = document.getElementById("budget");
+    const details = document.getElementById("details");
 
-      const isArabic = activeLanguage === "ar";
+    const isArabic = activeLanguage === "ar";
 
-      const message = isArabic
-        ? [
-            "طلب مشروع جديد من موقع ALZAYM",
-            "",
-            "الاسم: " + (name ? name.value : ""),
-            "رقم التواصل: " + (phone ? phone.value : ""),
-            "نوع المشروع: " + (service ? service.value : ""),
-            "الميزانية: " + (budget ? budget.value : ""),
-            "التفاصيل: " + (details ? details.value : "")
-          ].join("\n")
-        : [
-            "New project request from ALZAYM",
-            "",
-            "Name: " + (name ? name.value : ""),
-            "Phone: " + (phone ? phone.value : ""),
-            "Project type: " + (service ? service.value : ""),
-            "Estimated budget: " + (budget ? budget.value : ""),
-            "Details: " + (details ? details.value : "")
-          ].join("\n");
+    const payload = {
+      name: name ? name.value : "",
+      phone: phone ? phone.value : "",
+      email: "",
+      projectType: service ? service.value : "",
+      budget: budget ? budget.value : "",
+      details: details ? details.value : ""
+    };
+
+    const message = isArabic
+      ? [
+          "طلب مشروع جديد من موقع ALZAYM",
+          "",
+          "الاسم: " + payload.name,
+          "رقم التواصل: " + payload.phone,
+          "نوع المشروع: " + payload.projectType,
+          "الميزانية: " + payload.budget,
+          "التفاصيل: " + payload.details
+        ].join("\n")
+      : [
+          "New project request from ALZAYM",
+          "",
+          "Name: " + payload.name,
+          "Phone: " + payload.phone,
+          "Project type: " + payload.projectType,
+          "Estimated budget: " + payload.budget,
+          "Details: " + payload.details
+        ].join("\n");
+
+    try {
+      await fetch(
+        "https://alzaymdigital.app.n8n.cloud/webhook/alzaym-lead",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        }
+      );
 
       window.open(
         "https://wa.me/966596100109?text=" + encodeURIComponent(message),
         "_blank"
       );
-    });
-  }
-});
+
+      clientForm.reset();
+
+    } catch (error) {
+      console.error("n8n error:", error);
+
+      window.open(
+        "https://wa.me/966596100109?text=" + encodeURIComponent(message),
+        "_blank"
+      );
+    }
+  });
+}
 document.addEventListener("DOMContentLoaded", function () {
   const themeToggle = document.getElementById("themeToggle");
   const themeIcon = document.getElementById("themeIcon");
