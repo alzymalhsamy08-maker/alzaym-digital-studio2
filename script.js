@@ -571,6 +571,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 }
+  });
 document.addEventListener("DOMContentLoaded", function () {
   const themeToggle = document.getElementById("themeToggle");
   const themeIcon = document.getElementById("themeIcon");
