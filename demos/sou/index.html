@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SOU Café — ALZAYM Concept</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="alzaym-demo-bar">
+  <a href="../../index.html">← BACK TO ALZAYM</a>
+  <span>SOU · ALZAYM CONCEPT PROJECT</span>
+  <a href="../../index.html#project-form">BUILD SOMETHING LIKE THIS ↗</a>
+</div>
+
+<header class="nav">
+  <a href="#" class="brand">SOU<span>.</span></a>
+  <nav>
+    <a href="#menu">Menu</a>
+    <a href="#reserve">Tables</a>
+    <a href="#order">Order</a>
+  </nav>
+  <a class="pill" href="#order">ORDER NOW</a>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="copy">
+      <small>SPECIALTY CAFÉ · ALZAYM CONCEPT</small>
+      <h1>COFFEE,<br><em>made personal.</em></h1>
+      <p>A warm specialty café experience for coffee, food, desserts, table reservations and simple ordering.</p>
+      <a class="cta" href="#menu">EXPLORE THE MENU ↓</a>
+    </div>
+
+    <div class="cup-scene" id="cupScene" aria-hidden="true">
+      <div class="orbit"></div>
+      <div class="cup" id="cup">
+        <div class="coffee"></div>
+        <div class="handle"></div>
+        <span>SOU</span>
+      </div>
+      <div class="tag t1"><small>ROAST</small><b>Medium</b></div>
+      <div class="tag t2"><small>MOOD</small><b>Slow</b></div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="menu">
+    <div class="head"><small>01 / MENU</small><h2>YOUR DAILY<br><em>ritual.</em></h2></div>
+    <div class="tabs">
+      <button class="tab active" data-category="coffee">COFFEE</button>
+      <button class="tab" data-category="food">FOOD</button>
+      <button class="tab" data-category="dessert">DESSERT</button>
+    </div>
+    <div class="menu-grid" id="menuGrid"></div>
+  </section>
+
+  <section class="reserve" id="reserve">
+    <div>
+      <small>02 / TABLES</small>
+      <h2>STAY<br><em>a little longer.</em></h2>
+      <p>Choose a table, date and time. This concept sends the request through WhatsApp.</p>
+    </div>
+    <form id="reserveForm">
+      <label>Name<input id="reserveName" required></label>
+      <label>Guests<select id="reserveGuests"><option>2</option><option>3</option><option>4</option><option>6</option></select></label>
+      <label>Date<input id="reserveDate" type="date" required></label>
+      <label>Time<input id="reserveTime" type="time" required></label>
+      <button type="submit">RESERVE VIA WHATSAPP ↗</button>
+    </form>
+  </section>
+
+  <section class="order" id="order">
+    <div class="order-copy">
+      <small>03 / ORDER</small>
+      <h2>HERE.<br><em>or anywhere.</em></h2>
+      <div class="methods">
+        <button class="method active" data-method="Delivery">DELIVERY</button>
+        <button class="method" data-method="Pickup">PICKUP</button>
+        <button class="method" data-method="Dine In">DINE IN</button>
+      </div>
+    </div>
+
+    <aside class="cart">
+      <div class="cart-head"><h3>Your order</h3><span id="cartCount">0</span></div>
+      <div id="cartItems"><p class="empty">Choose something from the menu.</p></div>
+      <div class="payment">
+        <button class="pay active" data-pay="Apple Pay">Apple Pay</button>
+        <button class="pay" data-pay="Mada">mada</button>
+        <button class="pay" data-pay="Visa">VISA</button>
+        <button class="pay" data-pay="Cash">CASH</button>
+      </div>
+      <div class="total"><span>TOTAL</span><strong><b id="cartTotal">0</b> SAR</strong></div>
+      <button id="sendOrder" class="send">SEND ORDER ↗</button>
+    </aside>
+  </section>
+</main>
+
+<footer>
+  <strong>SOU.</strong>
+  <span>SPECIALTY CAFÉ EXPERIENCE · ALZAYM CONCEPT PROJECT</span>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
