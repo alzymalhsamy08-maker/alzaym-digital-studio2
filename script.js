@@ -1,851 +1,603 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const menuItems = document.querySelectorAll(".menu-item");
+  const heroImage = document.querySelector(".hero-image");
+  const revealTargets = document.querySelectorAll(
+    ".intro-content, .image-break-text, .menu-heading, .menu-item, .experience-content, .reservation"
+  );
+
+  // صور الأطباق تتبع الماوس
+  menuItems.forEach((item) => {
+    const preview = item.querySelector(".menu-preview");
+
+    if (!preview) return;
+
+    item.addEventListener("mousemove", (event) => {
+      preview.style.left = event.clientX + "px";
+      preview.style.top = event.clientY + "px";
+    });
+  });
+
+  // Parallax خفيف للـ Hero
+  if (heroImage) {
+    window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY;
+      heroImage.style.transform = `scale(1.05) translateY(${scrollY * 0.08}px)`;
+    });
+  }
+
+  // Reveal عند النزول
+  revealTargets.forEach((element) => {
+    element.classList.add("reveal");
+  });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15
+    }
+  );
+
+  revealTargets.forEach((element) => {
+    observer.observe(element);
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  /* =========================
+     TABLE SELECTION
+  ========================= */
+
+  const tables = document.querySelectorAll(".table.available");
+  const selectedTableText = document.getElementById("selectedTable");
+  const selectedGuests = document.getElementById("selectedGuests");
+  const selectedLocation = document.getElementById("selectedLocation");
+  const selectedView = document.getElementById("selectedView");
+  const tableStatus = document.getElementById("tableStatus");
+  const confirmTable = document.getElementById("confirmTable");
+
+  let currentTable = null;
+
+  tables.forEach((table) => {
+    table.addEventListener("click", () => {
+      tables.forEach((item) => item.classList.remove("selected"));
+
+      table.classList.add("selected");
+      currentTable = table;
+
+      const tableNumber = table.dataset.table;
+      const guests = table.dataset.guests;
+      const location = table.dataset.location;
+      const view = table.dataset.view;
+
+      if (tableStatus) {
+        tableStatus.textContent = "AVAILABLE";
+      }
+
+      if (selectedTableText) {
+        selectedTableText.textContent = `TABLE ${tableNumber}`;
+      }
+
+      if (selectedGuests) {
+        selectedGuests.textContent = `${guests} Guests`;
+      }
+
+      if (selectedLocation) {
+        selectedLocation.textContent = location;
+      }
+
+      if (selectedView) {
+        selectedView.textContent = view;
+      }
+
+      if (confirmTable) {
+        confirmTable.disabled = false;
+      }
+    });
+  });
+
+  if (confirmTable) {
+    confirmTable.addEventListener("click", () => {
+      if (!currentTable) return;
+
+      const tableNumber = currentTable.dataset.table;
+      const guests = currentTable.dataset.guests;
+      const location = currentTable.dataset.location;
+      const view = currentTable.dataset.view;
+
+      const message = [
+        "NOIR Reservation Request",
+        "",
+        `Table: ${tableNumber}`,
+        `Guests: ${guests}`,
+        `Location: ${location}`,
+        `View: ${view}`
+      ].join("\n");
+
+      const url =
+        "https://wa.me/966596100109?text=" +
+        encodeURIComponent(message);
+
+      window.open(url, "_blank");
+    });
+  }
+
+
+  /* =========================
+     DELIVERY / PICKUP
+  ========================= */
+
+  const orderMethods = document.querySelectorAll(".order-method");
+  const orderType = document.getElementById("orderType");
+
+  orderMethods.forEach((button) => {
+    button.addEventListener("click", () => {
+      orderMethods.forEach((item) => {
+        item.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
+      const method = button.dataset.orderMethod;
+
+      if (!orderType) return;
+
+      if (method === "pickup") {
+        orderType.textContent = "Pickup from Restaurant";
+      } else {
+        orderType.textContent = "Home Delivery";
+      }
+    });
+  });
+
+
+  /* =========================
+     3D RESTAURANT MOUSE MOTION
+  ========================= */
+
+  const scene = document.getElementById("restaurantScene");
+  const floor = scene?.querySelector(".restaurant-floor");
+
+  if (
+    scene &&
+    floor &&
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches
+  ) {
+    scene.addEventListener("mousemove", (event) => {
+      const rect = scene.getBoundingClientRect();
+
+      const x =
+        (event.clientX - rect.left) / rect.width - 0.5;
+
+      const y =
+        (event.clientY - rect.top) / rect.height - 0.5;
+
+      const rotateZ = -3 + x * 4;
+      const rotateX = 58 - y * 4;
+
+      floor.style.transform =
+        `rotateX(${rotateX}deg) rotateZ(${rotateZ}deg)`;
+    });
+
+    scene.addEventListener("mouseleave", () => {
+      floor.style.transform =
+        "rotateX(58deg) rotateZ(-3deg)";
+    });
+  }
+});
+/* =========================================
+   NOIR — MENU, CART & ORDERING
+   Unified version
+========================================= */
+
 document.addEventListener("DOMContentLoaded", function () {
-  const loader = document.getElementById("loader");
-  const themeToggle = document.getElementById("themeToggle");
-  const themeIcon = document.getElementById("themeIcon");
-  const languageToggle = document.getElementById("languageToggle");
-  const menuToggle = document.getElementById("menuToggle");
-  const mobileMenu = document.getElementById("mobileMenu");
-  const gateway = document.getElementById("gateway");
-  const gatewayStage = document.getElementById("gatewayStage");
-  const clientForm = document.getElementById("clientForm");
-  const formStatus = document.getElementById("formStatus");
-  const cursor = document.getElementById("cursor");
+  const WHATSAPP_NUMBER = "966596100109";
 
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
+  /* -------------------------
+     MENU: LUNCH / DINNER
+  ------------------------- */
 
-  const canHover = window.matchMedia("(pointer:fine)").matches;
+  const menuButtons = document.querySelectorAll(".menu-switch");
+  const menuPanels = document.querySelectorAll("[data-menu-panel]");
+  const menuDescription = document.getElementById("menuDescription");
+  const menuHours = document.getElementById("menuHours");
 
-  let activeLanguage =
-    localStorage.getItem("alzaym-language") ||
-    (navigator.language && navigator.language.startsWith("ar")
-      ? "ar"
-      : "en");
+  function switchMenu(menuName) {
+    menuButtons.forEach(function (button) {
+      button.classList.toggle("active", button.dataset.menu === menuName);
+    });
 
-  /* ---------------------------------------------------------
-     LOADER
-  --------------------------------------------------------- */
-
-  window.setTimeout(function () {
-    if (loader) {
-      loader.classList.add("is-hidden");
-    }
-  }, prefersReducedMotion ? 50 : 1050);
-
-  /* ---------------------------------------------------------
-     THEME
-  --------------------------------------------------------- */
-
-  function applyTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-
-    localStorage.setItem("alzaym-theme", theme);
-
-    if (themeIcon) {
-      themeIcon.textContent = theme === "dark" ? "◐" : "◑";
-    }
-
-    if (themeToggle) {
-      themeToggle.setAttribute(
-        "aria-label",
-        theme === "dark"
-          ? "Switch to light theme"
-          : "Switch to dark theme"
+    menuPanels.forEach(function (panel) {
+      panel.classList.toggle(
+        "active",
+        panel.dataset.menuPanel === menuName
       );
+    });
+
+    if (menuName === "dinner") {
+      if (menuDescription) {
+        menuDescription.textContent =
+          "A refined Saudi dinner menu inspired by traditional flavours, open-fire cooking and contemporary presentation.";
+      }
+
+      if (menuHours) {
+        menuHours.textContent = "DINNER · 6:00 PM — 12:00 AM";
+      }
+    } else {
+      if (menuDescription) {
+        menuDescription.textContent =
+          "A contemporary Saudi lunch menu built around familiar flavours, generous portions and modern presentation.";
+      }
+
+      if (menuHours) {
+        menuHours.textContent = "LUNCH · 12:00 — 5:00 PM";
+      }
     }
   }
 
-  const savedTheme = localStorage.getItem("alzaym-theme");
+  menuButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      switchMenu(button.dataset.menu);
+    });
+  });
 
-  const systemPrefersLight = window.matchMedia(
-    "(prefers-color-scheme: light)"
-  ).matches;
+  /* -------------------------
+     CART
+  ------------------------- */
 
-  applyTheme(
-    savedTheme ||
-      (systemPrefersLight ? "light" : "dark")
-  );
+  let cart = [];
 
-  if (themeToggle) {
-    themeToggle.addEventListener("click", function () {
-      const current =
-        document.documentElement.getAttribute("data-theme") ||
-        "dark";
+  const cartItems = document.getElementById("cartItems");
+  const cartCount = document.getElementById("cartCount");
+  const cartTotal = document.getElementById("cartTotal");
+  const clearCart = document.getElementById("clearCart");
+  const checkoutButton = document.getElementById("checkoutButton");
 
-      applyTheme(
-        current === "dark"
-          ? "light"
-          : "dark"
+  function createProduct(foodItem) {
+    const title = foodItem.querySelector("h3");
+    const arabic = foodItem.querySelector(".food-ar");
+    const priceElement = foodItem.querySelector(".food-action > strong");
+
+    const name =
+      foodItem.dataset.name ||
+      (title ? title.textContent.trim() : "Menu Item");
+
+    let price = Number(foodItem.dataset.price);
+
+    if (!Number.isFinite(price) || price <= 0) {
+      const match = priceElement
+        ? priceElement.textContent.match(/\d+(?:\.\d+)?/)
+        : null;
+
+      price = match ? Number(match[0]) : 0;
+    }
+
+    return {
+      id:
+        foodItem.dataset.id ||
+        name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+      name: name,
+      arabicName:
+        foodItem.dataset.nameAr ||
+        (arabic ? arabic.textContent.trim() : ""),
+      price: price,
+      quantity: 1
+    };
+  }
+
+  function getCartQuantity() {
+    return cart.reduce(function (sum, item) {
+      return sum + item.quantity;
+    }, 0);
+  }
+
+  function getCartTotal() {
+    return cart.reduce(function (sum, item) {
+      return sum + item.price * item.quantity;
+    }, 0);
+  }
+
+  function renderCart() {
+    if (cartCount) {
+      cartCount.textContent = getCartQuantity();
+    }
+
+    if (cartTotal) {
+      cartTotal.textContent = getCartTotal().toFixed(0);
+    }
+
+    if (checkoutButton) {
+      checkoutButton.disabled = cart.length === 0;
+    }
+
+    if (!cartItems) return;
+
+    if (cart.length === 0) {
+      cartItems.innerHTML = `
+        <div class="empty-cart" id="emptyCart">
+          <span>YOUR CART IS EMPTY.</span>
+          <p>Add a dish from the menu to start your order.</p>
+        </div>
+      `;
+      return;
+    }
+
+    cartItems.innerHTML = cart
+      .map(function (item) {
+        return `
+          <div class="cart-row" data-cart-id="${item.id}">
+            <div class="cart-row-info">
+              <strong>${item.name}</strong>
+              ${
+                item.arabicName
+                  ? `<span dir="rtl">${item.arabicName}</span>`
+                  : ""
+              }
+            </div>
+
+            <div class="cart-quantity">
+              <button
+                type="button"
+                data-cart-action="minus"
+                data-cart-id="${item.id}"
+                aria-label="Decrease quantity"
+              >−</button>
+
+              <span>${item.quantity}</span>
+
+              <button
+                type="button"
+                data-cart-action="plus"
+                data-cart-id="${item.id}"
+                aria-label="Increase quantity"
+              >+</button>
+            </div>
+
+            <div class="cart-row-price">
+              ${(item.price * item.quantity).toFixed(0)} SAR
+            </div>
+
+            <button
+              type="button"
+              class="cart-remove"
+              data-cart-action="remove"
+              data-cart-id="${item.id}"
+            >
+              REMOVE
+            </button>
+          </div>
+        `;
+      })
+      .join("");
+  }
+
+  document.addEventListener("click", function (event) {
+    const addButton = event.target.closest(".add-to-cart");
+    if (!addButton) return;
+
+    const foodItem = addButton.closest(".food-item");
+    if (!foodItem) return;
+
+    const product = createProduct(foodItem);
+
+    if (!product.price) {
+      console.warn("NOIR: Missing price for", product.name);
+      return;
+    }
+
+    const existing = cart.find(function (item) {
+      return item.id === product.id;
+    });
+
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push(product);
+    }
+
+    const originalText = addButton.textContent;
+    addButton.textContent = "ADDED ✓";
+    addButton.classList.add("added");
+
+    window.setTimeout(function () {
+      addButton.textContent = originalText || "ADD +";
+      addButton.classList.remove("added");
+    }, 700);
+
+    renderCart();
+  });
+
+  if (cartItems) {
+    cartItems.addEventListener("click", function (event) {
+      const button = event.target.closest("[data-cart-action]");
+      if (!button) return;
+
+      const id = button.dataset.cartId;
+      const action = button.dataset.cartAction;
+
+      const product = cart.find(function (item) {
+        return item.id === id;
+      });
+
+      if (!product) return;
+
+      if (action === "plus") {
+        product.quantity += 1;
+      }
+
+      if (action === "minus") {
+        product.quantity -= 1;
+
+        if (product.quantity <= 0) {
+          cart = cart.filter(function (item) {
+            return item.id !== id;
+          });
+        }
+      }
+
+      if (action === "remove") {
+        cart = cart.filter(function (item) {
+          return item.id !== id;
+        });
+      }
+
+      renderCart();
+    });
+  }
+
+  if (clearCart) {
+    clearCart.addEventListener("click", function () {
+      cart = [];
+      renderCart();
+    });
+  }
+
+  /* -------------------------
+     DELIVERY / PICKUP
+  ------------------------- */
+
+  const methodButtons = document.querySelectorAll(".order-method");
+  const deliveryFields = document.querySelector(".delivery-fields");
+  const pickupFields = document.querySelector(".pickup-fields");
+  const orderType = document.getElementById("orderType");
+  const sendButton = document.getElementById("sendWhatsappOrder");
+
+  let selectedMethod = "delivery";
+
+  function setOrderMethod(method) {
+    selectedMethod = method === "pickup" ? "pickup" : "delivery";
+
+    methodButtons.forEach(function (button) {
+      button.classList.toggle(
+        "active",
+        button.dataset.orderMethod === selectedMethod
+      );
+    });
+
+    if (selectedMethod === "pickup") {
+      if (deliveryFields) deliveryFields.classList.remove("active");
+      if (pickupFields) pickupFields.classList.add("active");
+      if (orderType) orderType.textContent = "Pickup from Branch";
+    } else {
+      if (pickupFields) pickupFields.classList.remove("active");
+      if (deliveryFields) deliveryFields.classList.add("active");
+      if (orderType) orderType.textContent = "Home Delivery";
+    }
+  }
+
+  methodButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      setOrderMethod(button.dataset.orderMethod);
+    });
+  });
+
+  /* CONTINUE ORDER:
+     keep the cart in memory and move to delivery / pickup details. */
+  if (checkoutButton) {
+    checkoutButton.addEventListener("click", function () {
+      if (!cart.length) return;
+
+      const orderSection = document.getElementById("order");
+
+      if (orderSection) {
+        orderSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    });
+  }
+
+  /* SEND THE FINAL ORDER TO WHATSAPP */
+  if (sendButton) {
+    sendButton.addEventListener("click", function () {
+      if (!cart.length) {
+        alert("Please add items to your order first.");
+        return;
+      }
+
+      let orderDetails = "";
+
+      if (selectedMethod === "delivery") {
+        const address =
+          document.getElementById("deliveryAddress")?.value.trim() || "";
+        const phone =
+          document.getElementById("deliveryPhone")?.value.trim() || "";
+
+        if (!address) {
+          alert("Please enter the delivery address.");
+          document.getElementById("deliveryAddress")?.focus();
+          return;
+        }
+
+        orderDetails = [
+          "Order type: Home Delivery",
+          "Address: " + address,
+          phone ? "Mobile: " + phone : ""
+        ]
+          .filter(Boolean)
+          .join("\n");
+      } else {
+        const branch =
+          document.getElementById("pickupBranch")?.value ||
+          "Riyadh — King Fahd Road";
+        const time =
+          document.getElementById("pickupTime")?.value ||
+          "As soon as possible";
+
+        orderDetails = [
+          "Order type: Pickup",
+          "Branch: " + branch,
+          "Pickup time: " + time
+        ].join("\n");
+      }
+
+      const itemsText = cart
+        .map(function (item) {
+          return (
+            item.name +
+            " x" +
+            item.quantity +
+            " = " +
+            (item.price * item.quantity).toFixed(0) +
+            " SAR"
+          );
+        })
+        .join("\n");
+
+      const paymentMethod =
+        document.querySelector('input[name="payment"]:checked')?.value ||
+        "Not selected";
+
+      const message = [
+        "New NOIR Order",
+        "",
+        orderDetails,
+        "",
+        "Items:",
+        itemsText,
+        "",
+        "Payment: " + paymentMethod,
+        "Total: " + getCartTotal().toFixed(0) + " SAR"
+      ].join("\n");
+
+      window.open(
+        "https://wa.me/" +
+          WHATSAPP_NUMBER +
+          "?text=" +
+          encodeURIComponent(message),
+        "_blank"
       );
     });
   }
 
-  /* ---------------------------------------------------------
-     LANGUAGE / RTL
-  --------------------------------------------------------- */
-
-  const selectCopy = {
-    en: {
-      servicePlaceholder: "Choose a project type",
-
-      services: [
-        "Professional website",
-        "Online store",
-        "POS & sales system",
-        "Inventory & loyalty system",
-        "App or platform",
-        "Ordering & delivery",
-        "Other"
-      ],
-
-      budgetPlaceholder: "Choose a package / budget",
-
-      budgets: [
-        "Professional Website — 525 SAR",
-        "E-commerce Store — 929 SAR",
-        "App / Business System — 1,424 SAR",
-        "Custom Project — Request Quote"
-      ],
-
-      detailsPlaceholder:
-        "What do you want to build?",
-
-      namePlaceholder:
-        "Mohammed"
-    },
-
-    ar: {
-      servicePlaceholder: "اختر نوع المشروع",
-
-      services: [
-        "موقع إلكتروني احترافي",
-        "متجر إلكتروني",
-        "نظام مبيعات وكاشير",
-        "نظام مخزون وولاء",
-        "تطبيق أو منصة",
-        "طلبات وتوصيل",
-        "مشروع آخر"
-      ],
-
-      budgetPlaceholder: "اختر الباقة / الميزانية",
-
-      budgets: [
-        "موقع احترافي — 525 ريال",
-        "متجر إلكتروني — 929 ريال",
-        "تطبيق / نظام أعمال — 1,424 ريال",
-        "مشروع مخصص — طلب تسعير"
-      ],
-
-      detailsPlaceholder:
-        "اكتب فكرتك والخدمات المطلوبة وطريقة عمل نشاطك...",
-
-      namePlaceholder:
-        "محمد"
-    }
-  };
-
-  function applyLanguage(language) {
-    activeLanguage =
-      language === "ar"
-        ? "ar"
-        : "en";
-
-    document.documentElement.lang =
-      activeLanguage;
-
-    document.documentElement.dir =
-      activeLanguage === "ar"
-        ? "rtl"
-        : "ltr";
-
-    document
-      .querySelectorAll("[data-copy-en]")
-      .forEach(function (element) {
-        const value =
-          activeLanguage === "ar"
-            ? element.getAttribute(
-                "data-copy-ar"
-              )
-            : element.getAttribute(
-                "data-copy-en"
-              );
-
-        if (value !== null) {
-          element.textContent = value;
-        }
-      });
-
-    if (languageToggle) {
-      languageToggle.textContent =
-        activeLanguage === "ar"
-          ? "EN"
-          : "AR";
-    }
-
-    const name =
-      document.getElementById("name");
-
-    const details =
-      document.getElementById("details");
-
-    const service =
-      document.getElementById("service");
-
-    const budget =
-      document.getElementById("budget");
-
-    const strings =
-      selectCopy[activeLanguage];
-
-    if (name) {
-      name.placeholder =
-        strings.namePlaceholder;
-    }
-
-    if (details) {
-      details.placeholder =
-        strings.detailsPlaceholder;
-    }
-
-    if (service) {
-      const currentValue =
-        service.value;
-
-      const options =
-        service.options;
-
-      if (options.length >= 8) {
-        options[0].textContent =
-          strings.servicePlaceholder;
-
-        for (
-          let i = 1;
-          i < 8;
-          i += 1
-        ) {
-          options[i].textContent =
-            strings.services[i - 1];
-        }
-      }
-
-      service.value =
-        currentValue;
-    }
-
-    if (budget) {
-      const currentValue =
-        budget.value;
-
-      const options =
-        budget.options;
-
-      if (
-        options.length >=
-        strings.budgets.length + 1
-      ) {
-        options[0].textContent =
-          strings.budgetPlaceholder;
-
-        for (
-          let i = 1;
-          i <= strings.budgets.length;
-          i += 1
-        ) {
-          options[i].textContent =
-            strings.budgets[i - 1];
-        }
-      }
-
-      budget.value =
-        currentValue;
-    }
-
-    localStorage.setItem(
-      "alzaym-language",
-      activeLanguage
-    );
-  }
-
-  if (languageToggle) {
-    languageToggle.addEventListener(
-      "click",
-      function () {
-        applyLanguage(
-          activeLanguage === "ar"
-            ? "en"
-            : "ar"
-        );
-      }
-    );
-  }
-
-  applyLanguage(activeLanguage);
-
-  /* ---------------------------------------------------------
-     MOBILE MENU
-  --------------------------------------------------------- */
-
-  function setMenu(open) {
-    if (
-      !mobileMenu ||
-      !menuToggle
-    ) {
-      return;
-    }
-
-    mobileMenu.classList.toggle(
-      "is-open",
-      open
-    );
-
-    mobileMenu.setAttribute(
-      "aria-hidden",
-      open
-        ? "false"
-        : "true"
-    );
-
-    menuToggle.setAttribute(
-      "aria-expanded",
-      open
-        ? "true"
-        : "false"
-    );
-
-    document.body.style.overflow =
-      open
-        ? "hidden"
-        : "";
-  }
-
-  if (menuToggle) {
-    menuToggle.addEventListener(
-      "click",
-      function () {
-        const open =
-          menuToggle.getAttribute(
-            "aria-expanded"
-          ) !== "true";
-
-        setMenu(open);
-      }
-    );
-  }
-
-  if (mobileMenu) {
-    mobileMenu
-      .querySelectorAll("a")
-      .forEach(function (link) {
-        link.addEventListener(
-          "click",
-          function () {
-            setMenu(false);
-          }
-        );
-      });
-  }
-
-  document.addEventListener(
-    "keydown",
-    function (event) {
-      if (event.key === "Escape") {
-        setMenu(false);
-      }
-    }
-  );
-
-  window.addEventListener(
-    "resize",
-    function () {
-      if (
-        window.innerWidth > 1180
-      ) {
-        setMenu(false);
-      }
-    }
-  );
-
-  /* ---------------------------------------------------------
-     REVEAL ON SCROLL
-  --------------------------------------------------------- */
-
-  const revealItems =
-    document.querySelectorAll(
-      ".reveal"
-    );
-
-  if (
-    prefersReducedMotion ||
-    !(
-      "IntersectionObserver"
-      in window
-    )
-  ) {
-    revealItems.forEach(
-      function (item) {
-        item.classList.add(
-          "is-visible"
-        );
-      }
-    );
-  } else {
-    const revealObserver =
-      new IntersectionObserver(
-        function (entries) {
-          entries.forEach(
-            function (entry) {
-              if (
-                !entry.isIntersecting
-              ) {
-                return;
-              }
-
-              entry.target.classList.add(
-                "is-visible"
-              );
-
-              revealObserver.unobserve(
-                entry.target
-              );
-            }
-          );
-        },
-        {
-          threshold: 0.12,
-          rootMargin:
-            "0px 0px -6% 0px"
-        }
-      );
-
-    revealItems.forEach(
-      function (item, index) {
-        item.style.transitionDelay =
-          Math.min(
-            index % 4,
-            3
-          ) *
-            70 +
-          "ms";
-
-        revealObserver.observe(
-          item
-        );
-      }
-    );
-  }
-
-  /* ---------------------------------------------------------
-     HERO TITLE ENTRANCE
-  --------------------------------------------------------- */
-
-  if (!prefersReducedMotion) {
-    document
-      .querySelectorAll(
-        ".title-mask > span, .title-mask > em"
-      )
-      .forEach(
-        function (
-          line,
-          index
-        ) {
-          line.animate(
-            [
-              {
-                opacity: 0,
-                transform:
-                  "translateY(110%)"
-              },
-              {
-                opacity: 1,
-                transform:
-                  "translateY(0)"
-              }
-            ],
-            {
-              duration: 950,
-
-              delay:
-                220 +
-                index * 100,
-
-              easing:
-                "cubic-bezier(0.16,1,0.3,1)",
-
-              fill: "both"
-            }
-          );
-        }
-      );
-  }
-
-  /* ---------------------------------------------------------
-     SMOOTH 3D GATEWAY
-  --------------------------------------------------------- */
-
-  if (
-    gateway &&
-    gatewayStage &&
-    canHover &&
-    !prefersReducedMotion
-  ) {
-    let targetRX = 0;
-    let targetRY = 0;
-    let targetX = 0;
-    let targetY = 0;
-
-    let currentRX = 0;
-    let currentRY = 0;
-    let currentX = 0;
-    let currentY = 0;
-
-    function animateGateway() {
-      const ease = 0.085;
-
-      currentRX +=
-        (targetRX - currentRX) *
-        ease;
-
-      currentRY +=
-        (targetRY - currentRY) *
-        ease;
-
-      currentX +=
-        (targetX - currentX) *
-        ease;
-
-      currentY +=
-        (targetY - currentY) *
-        ease;
-
-      gatewayStage.style.transform =
-        "translate3d(" +
-        currentX.toFixed(2) +
-        "px," +
-        currentY.toFixed(2) +
-        "px,0) rotateX(" +
-        currentRX.toFixed(2) +
-        "deg) rotateY(" +
-        currentRY.toFixed(2) +
-        "deg)";
-
-      requestAnimationFrame(
-        animateGateway
-      );
-    }
-
-    gateway.addEventListener(
-      "pointermove",
-      function (event) {
-        const rect =
-          gateway.getBoundingClientRect();
-
-        const x =
-          (event.clientX -
-            rect.left) /
-            rect.width -
-          0.5;
-
-        const y =
-          (event.clientY -
-            rect.top) /
-            rect.height -
-          0.5;
-
-        targetRY =
-          x * 7.2;
-
-        targetRX =
-          y * -5.4;
-
-        targetX =
-          x * 8;
-
-        targetY =
-          y * 8;
-      }
-    );
-
-    gateway.addEventListener(
-      "pointerleave",
-      function () {
-        targetRX = 0;
-        targetRY = 0;
-        targetX = 0;
-        targetY = 0;
-      }
-    );
-
-    requestAnimationFrame(
-      animateGateway
-    );
-  }
-
-  /* ---------------------------------------------------------
-     CUSTOM CURSOR
-  --------------------------------------------------------- */
-
-  if (
-    cursor &&
-    canHover &&
-    !prefersReducedMotion
-  ) {
-    let targetCursorX =
-      window.innerWidth / 2;
-
-    let targetCursorY =
-      window.innerHeight / 2;
-
-    let currentCursorX =
-      targetCursorX;
-
-    let currentCursorY =
-      targetCursorY;
-
-    function animateCursor() {
-      const ease = 0.22;
-
-      currentCursorX +=
-        (
-          targetCursorX -
-          currentCursorX
-        ) * ease;
-
-      currentCursorY +=
-        (
-          targetCursorY -
-          currentCursorY
-        ) * ease;
-
-      cursor.style.left =
-        currentCursorX.toFixed(2) +
-        "px";
-
-      cursor.style.top =
-        currentCursorY.toFixed(2) +
-        "px";
-
-      requestAnimationFrame(
-        animateCursor
-      );
-    }
-
-    document.addEventListener(
-      "pointermove",
-      function (event) {
-        targetCursorX =
-          event.clientX;
-
-        targetCursorY =
-          event.clientY;
-
-        cursor.classList.add(
-          "is-visible"
-        );
-      }
-    );
-
-    document.addEventListener(
-      "pointerleave",
-      function () {
-        cursor.classList.remove(
-          "is-visible"
-        );
-      }
-    );
-
-    document
-      .querySelectorAll(
-        ".project-card"
-      )
-      .forEach(
-        function (project) {
-          project.addEventListener(
-            "mouseenter",
-            function () {
-              cursor.classList.add(
-                "is-project"
-              );
-            }
-          );
-
-          project.addEventListener(
-            "mouseleave",
-            function () {
-              cursor.classList.remove(
-                "is-project"
-              );
-            }
-          );
-        }
-      );
-
-    requestAnimationFrame(
-      animateCursor
-    );
-  }
-
-  /* ---------------------------------------------------------
-     EXISTING ALZAYM AUTOMATION
-     n8n + WhatsApp
-  --------------------------------------------------------- */
-
-  if (clientForm) {
-    clientForm.addEventListener(
-      "submit",
-      async function (event) {
-        event.preventDefault();
-
-        const name =
-          document.getElementById(
-            "name"
-          );
-
-        const phone =
-          document.getElementById(
-            "phone"
-          );
-
-        const service =
-          document.getElementById(
-            "service"
-          );
-
-        const budget =
-          document.getElementById(
-            "budget"
-          );
-
-        const details =
-          document.getElementById(
-            "details"
-          );
-
-        const isArabic =
-          activeLanguage === "ar";
-
-        const payload = {
-          name: name
-            ? name.value.trim()
-            : "",
-
-          phone: phone
-            ? phone.value.trim()
-            : "",
-
-          email: "",
-
-          projectType: service
-            ? service.value
-            : "",
-
-          budget: budget
-            ? budget.value
-            : "",
-
-          details: details
-            ? details.value.trim()
-            : ""
-        };
-
-        const message =
-          isArabic
-            ? [
-                "طلب مشروع جديد من موقع ALZAYM",
-                "",
-                "الاسم: " +
-                  payload.name,
-                "رقم التواصل: " +
-                  payload.phone,
-                "نوع المشروع: " +
-                  payload.projectType,
-                "الميزانية: " +
-                  payload.budget,
-                "التفاصيل: " +
-                  payload.details
-              ].join("\n")
-            : [
-                "New project request from ALZAYM",
-                "",
-                "Name: " +
-                  payload.name,
-                "Phone: " +
-                  payload.phone,
-                "Project type: " +
-                  payload.projectType,
-                "Estimated budget: " +
-                  payload.budget,
-                "Details: " +
-                  payload.details
-              ].join("\n");
-
-        if (formStatus) {
-          formStatus.textContent =
-            isArabic
-              ? "جارٍ تجهيز طلبك..."
-              : "Preparing your request...";
-        }
-
-        try {
-          await fetch(
-            "https://alzaymdigital.app.n8n.cloud/webhook/alzaym-lead",
-            {
-              method: "POST",
-
-              headers: {
-                "Content-Type":
-                  "application/json"
-              },
-
-              body:
-                JSON.stringify(
-                  payload
-                )
-            }
-          );
-
-          if (formStatus) {
-            formStatus.textContent =
-              isArabic
-                ? "تم إرسال البيانات. سيتم فتح واتساب الآن."
-                : "Details sent. Opening WhatsApp now.";
-          }
-
-          window.open(
-            "https://wa.me/966596100109?text=" +
-              encodeURIComponent(
-                message
-              ),
-            "_blank"
-          );
-
-          clientForm.reset();
-
-          applyLanguage(
-            activeLanguage
-          );
-        } catch (error) {
-          console.error(
-            "n8n error:",
-            error
-          );
-
-          if (formStatus) {
-            formStatus.textContent =
-              isArabic
-                ? "تعذر الوصول للأتمتة، سيتم فتح واتساب مباشرة."
-                : "Automation unavailable. Opening WhatsApp directly.";
-          }
-
-          window.open(
-            "https://wa.me/966596100109?text=" +
-              encodeURIComponent(
-                message
-              ),
-            "_blank"
-          );
-        }
-      }
-    );
-  }
+  /* Initial state */
+  switchMenu("lunch");
+  setOrderMethod("delivery");
+  renderCart();
 });
