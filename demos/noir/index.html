@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOIR — Contemporary Saudi Dining</title>
+  <meta name="description" content="NOIR — a cinematic contemporary Saudi restaurant concept with interactive menu, reservations and ordering." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="alzaym-demo-bar">
+  <a href="../../index.html">← BACK TO ALZAYM</a>
+  <span>NOIR · ALZAYM CONCEPT PROJECT</span>
+  <a href="../../index.html#project-form">BUILD SOMETHING LIKE THIS ↗</a>
+</div>
+
+  <header class="site-header">
+    <a class="brand" href="#top">NOIR<span>.</span></a>
+    <nav>
+      <a href="#menu">Menu</a>
+      <a href="#experience">Experience</a>
+      <a href="#reservation">Reservation</a>
+      <a href="#order">Order</a>
+    </nav>
+    <a class="header-cta" href="#reservation">BOOK A TABLE ↗</a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <img class="hero-image" src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=2000&q=88" alt="Elegant dark restaurant interior" />
+      <div class="hero-overlay"></div>
+      <div class="hero-kicker">RIYADH · SAUDI ARABIA</div>
+      <div class="hero-copy">
+        <p>CONTEMPORARY SAUDI DINING</p>
+        <h1>TASTE<br><em>AFTER DARK.</em></h1>
+        <div class="hero-bottom">
+          <span>Seasonal ingredients. Familiar flavours. A darker point of view.</span>
+          <a href="#menu">EXPLORE THE MENU ↓</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro">
+      <div class="section-number">01 / NOIR</div>
+      <div class="intro-content">
+        <h2>ROOTED HERE.<br><em>REIMAGINED NOW.</em></h2>
+        <p>NOIR is a contemporary Saudi dining concept inspired by open fire, local ingredients and the generosity of the table.</p>
+        <p dir="rtl" lang="ar">مطعم سعودي معاصر يعيد تقديم النكهات المألوفة بروح حديثة وتجربة داكنة وأنيقة.</p>
+      </div>
+    </section>
+
+    <section class="image-break">
+      <img src="https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=2000&q=88" alt="Chef plating a refined dish" />
+      <div class="image-break-text">
+        <span>OPEN FIRE · LOCAL FLAVOURS · LATE NIGHTS</span>
+        <strong>NOT TRADITIONAL.<br>STILL OURS.</strong>
+      </div>
+    </section>
+
+    <section class="menu-section" id="menu">
+      <div class="menu-heading">
+        <div>
+          <span class="section-number">02 / MENU</span>
+          <h2>THE MENU<br><em>CHANGES WITH THE MOOD.</em></h2>
+        </div>
+        <div class="menu-meta">
+          <p id="menuDescription">A contemporary Saudi lunch menu built around familiar flavours, generous portions and modern presentation.</p>
+          <strong id="menuHours">LUNCH · 12:00 — 5:00 PM</strong>
+        </div>
+      </div>
+
+      <div class="menu-tabs" role="tablist" aria-label="Choose menu">
+        <button class="menu-switch active" type="button" data-menu="lunch">LUNCH</button>
+        <button class="menu-switch" type="button" data-menu="dinner">DINNER</button>
+      </div>
+
+      <div class="menu-panel active" data-menu-panel="lunch">
+        <article class="food-item menu-item" data-id="jareesh" data-name="Smoked Jareesh" data-name-ar="جريش مدخن" data-price="48">
+          <div class="food-number">01</div>
+          <div class="food-info"><h3>SMOKED JAREESH</h3><p class="food-ar" dir="rtl">جريش مدخن</p><small>Brown butter · charred onion · herbs</small></div>
+          <div class="food-action"><strong>48 SAR</strong><button class="add-to-cart" type="button">ADD +</button></div>
+          <img class="menu-preview" src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80" alt="Smoked jareesh concept dish" />
+        </article>
+        <article class="food-item menu-item" data-id="kabsa" data-name="Fire-Grilled Kabsa" data-name-ar="كبسة على النار" data-price="74">
+          <div class="food-number">02</div>
+          <div class="food-info"><h3>FIRE-GRILLED KABSA</h3><p class="food-ar" dir="rtl">كبسة على النار</p><small>Smoked chicken · saffron rice · tomato jus</small></div>
+          <div class="food-action"><strong>74 SAR</strong><button class="add-to-cart" type="button">ADD +</button></div>
+          <img class="menu-preview" src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=80" alt="Rice and grilled chicken concept dish" />
+        </article>
+        <article class="food-item menu-item" data-id="lamb" data-name="Najdi Lamb" data-name-ar="لحم نجدي" data-price="96">
+          <div class="food-number">03</div>
+          <div class="food-info"><h3>NAJDI LAMB</h3><p class="food-ar" dir="rtl">لحم نجدي</p><small>Slow lamb · black lime · roasted roots</small></div>
+          <div class="food-action"><strong>96 SAR</strong><button class="add-to-cart" type="button">ADD +</button></div>
+          <img class="menu-preview" src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80" alt="Lamb concept dish" />
+        </article>
+        <article class="food-item menu-item" data-id="date" data-name="Date & Tahini" data-name-ar="تمر وطحينة" data-price="39">
+          <div class="food-number">04</div>
+          <div class="food-info"><h3>DATE & TAHINI</h3><p class="food-ar" dir="rtl">تمر وطحينة</p><small>Warm dates · sesame · salted caramel</small></div>
+          <div class="food-action"><strong>39 SAR</strong><button class="add-to-cart" type="button">ADD +</button></div>
+          <img class="menu-preview" src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=900&q=80" alt="Date dessert concept" />
+        </article>
+      </div>
+
+      <div class="menu-panel" data-menu-panel="dinner">
+        <article class="food-item menu-item" data-id="maqluba" data-name="Black Maqluba" data-name-ar="مقلوبة نوير" data-price="82">
+          <div class="food-number">01</div>
+          <div class="food-info"><h3>BLACK MAQLUBA</h3><p class="food-ar" dir="rtl">مقلوبة نوير</p><small>Short rib · aubergine · smoked yoghurt</small></div>
+          <div class="food-action"><strong>82 SAR</strong><button class="add-to-cart" type="button">ADD +</button></div>
+          <img class="menu-preview" src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=80" alt="Dinner rice concept dish" />
+        </article>
+        <article class="food-item menu-item" data-id="sea-bass" data-name="Red Sea Bass" data-name-ar="قاروص البحر الأحمر" data-price="110">
+          <div class="food-number">02</div>
+          <div class="food-info"><h3>RED SEA BASS</h3><p class="food-ar" dir="rtl">قاروص البحر الأحمر</p><small>Coal-roasted fish · citrus · green chilli</small></div>
+          <div class="food-action"><strong>110 SAR</strong><button class="add-to-cart" type="button">ADD +</button></div>
+          <img class="menu-preview" src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=900&q=80" alt="Grilled fish concept dish" />
+        </article>
+        <article class="food-item menu-item" data-id="tenderloin" data-name="Desert Tenderloin" data-name-ar="تندرلوين الصحراء" data-price="128">
+          <div class="food-number">03</div>
+          <div class="food-info"><h3>DESERT TENDERLOIN</h3><p class="food-ar" dir="rtl">تندرلوين الصحراء</p><small>Beef · date glaze · smoked pepper</small></div>
+          <div class="food-action"><strong>128 SAR</strong><button class="add-to-cart" type="button">ADD +</button></div>
+          <img class="menu-preview" src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=900&q=80" alt="Tenderloin concept dish" />
+        </article>
+        <article class="food-item menu-item" data-id="saffron" data-name="Saffron Milk" data-name-ar="حليب الزعفران" data-price="42">
+          <div class="food-number">04</div>
+          <div class="food-info"><h3>SAFFRON MILK</h3><p class="food-ar" dir="rtl">حليب الزعفران</p><small>Saffron custard · cardamom · pistachio</small></div>
+          <div class="food-action"><strong>42 SAR</strong><button class="add-to-cart" type="button">ADD +</button></div>
+          <img class="menu-preview" src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=900&q=80" alt="Saffron dessert concept" />
+        </article>
+      </div>
+
+      <aside class="cart-shell" aria-label="Shopping cart">
+        <div class="cart-head"><div><span>YOUR ORDER</span><strong><b id="cartCount">0</b> ITEMS</strong></div><button id="clearCart" type="button">CLEAR</button></div>
+        <div id="cartItems"></div>
+        <div class="cart-foot"><span>TOTAL</span><strong><b id="cartTotal">0</b> SAR</strong></div>
+        <button class="checkout" id="checkoutButton" type="button" disabled>CONTINUE ORDER →</button>
+      </aside>
+    </section>
+
+    <section class="experience" id="experience">
+      <div class="experience-content">
+        <span class="section-number">03 / EXPERIENCE</span>
+        <h2>CHOOSE<br><em>YOUR TABLE.</em></h2>
+        <p>A small interactive floor concept. Select an available table and send the reservation request directly through WhatsApp.</p>
+      </div>
+      <div class="restaurant-scene" id="restaurantScene">
+        <div class="restaurant-floor">
+          <div class="floor-label kitchen">KITCHEN</div>
+          <div class="floor-label window">CITY VIEW</div>
+          <button class="table available t1" type="button" data-table="01" data-guests="2" data-location="Window" data-view="City View">01</button>
+          <button class="table available t2" type="button" data-table="02" data-guests="4" data-location="Main Hall" data-view="Open Kitchen">02</button>
+          <button class="table unavailable t3" type="button" disabled>03</button>
+          <button class="table available t4" type="button" data-table="04" data-guests="4" data-location="Corner" data-view="Private">04</button>
+          <button class="table available t5" type="button" data-table="05" data-guests="6" data-location="Main Hall" data-view="Central">05</button>
+        </div>
+      </div>
+      <div class="reservation-card">
+        <span id="tableStatus">SELECT A TABLE</span>
+        <strong id="selectedTable">TABLE —</strong>
+        <div><span id="selectedGuests">— Guests</span><span id="selectedLocation">—</span><span id="selectedView">—</span></div>
+        <button id="confirmTable" type="button" disabled>RESERVE ON WHATSAPP ↗</button>
+      </div>
+    </section>
+
+    <section class="reservation" id="reservation">
+      <span class="section-number">04 / RESERVATION</span>
+      <h2>MAKE THE NIGHT<br><em>YOURS.</em></h2>
+      <a href="#experience">CHOOSE YOUR TABLE ↑</a>
+    </section>
+
+    <section class="ordering" id="order">
+      <span class="section-number">05 / ORDER FROM NOIR</span>
+      <div class="ordering-heading">
+        <h2>EAT HERE.<br><em>OR ANYWHERE.</em></h2>
+        <p>Choose delivery or pickup, then send your order directly to us.</p>
+      </div>
+
+      <div class="order-methods">
+        <button class="order-method active" type="button" data-order-method="delivery"><span>01</span><strong>DELIVERY</strong><small>To your address</small></button>
+        <button class="order-method" type="button" data-order-method="pickup"><span>02</span><strong>PICKUP</strong><small>From the restaurant</small></button>
+      </div>
+
+      <div class="order-form">
+        <div class="order-summary-title"><span>ORDER TYPE</span><strong id="orderType">Home Delivery</strong></div>
+
+        <div class="delivery-fields active">
+          <label>DELIVERY ADDRESS<input id="deliveryAddress" type="text" placeholder="District, street, building..." /></label>
+          <label>MOBILE NUMBER<input id="deliveryPhone" type="tel" placeholder="05xxxxxxxx" /></label>
+        </div>
+
+        <div class="pickup-fields">
+          <label>BRANCH<select id="pickupBranch"><option>Riyadh — King Fahd Road</option><option>Riyadh — Olaya</option></select></label>
+          <label>PICKUP TIME<select id="pickupTime"><option>As soon as possible</option><option>In 30 minutes</option><option>In 60 minutes</option></select></label>
+        </div>
+
+        <div class="payment-block">
+          <span>PAYMENT METHOD</span>
+          <div class="payment-options">
+            <label><input type="radio" name="payment" value="Apple Pay" checked /> Apple Pay</label>
+            <label><input type="radio" name="payment" value="Mada" /> Mada</label>
+            <label><input type="radio" name="payment" value="Visa / Mastercard" /> Visa / Mastercard</label>
+            <label><input type="radio" name="payment" value="Cash" /> Cash</label>
+            <label><input type="radio" name="payment" value="WhatsApp" /> WhatsApp</label>
+          </div>
+          <small>Demo interface — no live payment gateway is connected.</small>
+        </div>
+
+        <button class="send-order" id="sendWhatsappOrder" type="button">SEND ORDER ON WHATSAPP ↗</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-logo">NOIR<span>.</span></div>
+    <div class="footer-grid"><span>CONTEMPORARY SAUDI DINING</span><span>RIYADH · SAUDI ARABIA</span><a href="#top">BACK TO TOP ↑</a></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
