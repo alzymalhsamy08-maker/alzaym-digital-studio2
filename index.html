@@ -1,221 +1,708 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NOIR — Contemporary Saudi Dining</title>
-  <meta name="description" content="NOIR — a cinematic contemporary Saudi restaurant concept with interactive menu, reservations and ordering." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ALZAYM Digital Studio — Websites, E-commerce & Digital Experiences</title>
+  <meta name="description" content="ALZAYM Digital Studio creates premium websites, e-commerce experiences and digital products for ambitious businesses in Saudi Arabia and beyond.">
+  <meta name="author" content="ALZAYM Digital Studio">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="ALZAYM Digital Studio">
+  <meta property="og:description" content="Websites, e-commerce and digital experiences with a distinctive point of view.">
+  <meta property="og:type" content="website">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <div class="loader" id="loader">
+    <img class="loader-logo" src="alzaym-logo.png.png" alt="ALZAYM Digital Studio logo">
+    <div class="loader-track"><i></i></div>
+    <small>DIGITAL STUDIO</small>
+  </div>
 
-<div class="alzaym-demo-bar">
-  <a href="../../index.html">← BACK TO ALZAYM</a>
-  <span>NOIR · ALZAYM CONCEPT PROJECT</span>
-  <a href="../../index.html#project-form">BUILD SOMETHING LIKE THIS ↗</a>
-</div>
+  <div class="cursor" id="cursor" aria-hidden="true"><span>VIEW</span></div>
 
-  <header class="site-header">
-    <a class="brand" href="#top">NOIR<span>.</span></a>
-    <nav>
-      <a href="#menu">Menu</a>
-      <a href="#experience">Experience</a>
-      <a href="#reservation">Reservation</a>
-      <a href="#order">Order</a>
+  <header class="site-header" id="siteHeader">
+    <a class="brand brand-logo" href="#home" aria-label="ALZAYM home"><img src="alzaym-logo.png.png" alt="ALZAYM Digital Studio"></a>
+
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="#work" data-copy-en="Work" data-copy-ar="الأعمال">Work</a>
+      <a href="#services" data-copy-en="Services" data-copy-ar="الخدمات">Services</a>
+      <a href="#pricing" data-copy-en="Pricing" data-copy-ar="الأسعار">Pricing</a>
+      <a href="#studio" data-copy-en="Studio" data-copy-ar="الاستوديو">Studio</a>
+      <a href="#process" data-copy-en="Process" data-copy-ar="الخطوات">Process</a>
     </nav>
-    <a class="header-cta" href="#reservation">BOOK A TABLE ↗</a>
+
+    <div class="header-actions">
+
+      <div class="social-links social-links-top" aria-label="Social media">
+        <a class="social-icon" href="https://www.instagram.com/alzaym.digital" target="_blank" rel="noopener noreferrer" aria-label="ALZAYM on Instagram" title="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect>
+            <circle cx="12" cy="12" r="4"></circle>
+            <circle class="fill-dot" cx="17.4" cy="6.7" r="1"></circle>
+          </svg>
+        </a>
+        <a class="social-icon" href="https://www.tiktok.com/@alzaym.digital" target="_blank" rel="noopener noreferrer" aria-label="ALZAYM on TikTok" title="TikTok">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14.2 4.2v10.1a4.6 4.6 0 1 1-3.7-4.5"></path>
+            <path d="M14.2 4.2c.7 2.2 2.2 3.7 4.5 4.3"></path>
+          </svg>
+        </a>
+        <a class="social-icon" href="https://x.com/alzaym_digital?s=11" target="_blank" rel="noopener noreferrer" aria-label="ALZAYM on X" title="X">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 4.5 19 19.5"></path>
+            <path d="M19 4.5 5 19.5"></path>
+          </svg>
+        </a>
+      </div>
+      <button class="round-control" id="themeToggle" type="button" aria-label="Switch color theme">
+        <span id="themeIcon">◐</span>
+      </button>
+
+      <button class="lang-control" id="languageToggle" type="button" aria-label="Switch language">
+        AR
+      </button>
+
+      <a class="start-project" href="#project-form"
+         data-copy-en="Start a project"
+         data-copy-ar="ابدأ مشروعك">Start a project</a>
+
+      <button class="menu-toggle" id="menuToggle" type="button"
+              aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <img class="hero-image" src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=2000&q=88" alt="Elegant dark restaurant interior" />
-      <div class="hero-overlay"></div>
-      <div class="hero-kicker">RIYADH · SAUDI ARABIA</div>
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <div class="mobile-menu-top">
+        <span>ALZAYM DIGITAL STUDIO</span>
+        <small>© 2026</small>
+      </div>
+
+      <nav>
+        <a href="#work">
+          <span>01</span>
+          <strong data-copy-en="Work" data-copy-ar="الأعمال">Work</strong>
+          <b>↗</b>
+        </a>
+        <a href="#services">
+          <span>02</span>
+          <strong data-copy-en="Services" data-copy-ar="الخدمات">Services</strong>
+          <b>↗</b>
+        </a>
+        <a href="#pricing">
+          <span>03</span>
+          <strong data-copy-en="Pricing" data-copy-ar="الأسعار">Pricing</strong>
+          <b>↗</b>
+        </a>
+        <a href="#studio">
+          <span>04</span>
+          <strong data-copy-en="Studio" data-copy-ar="الاستوديو">Studio</strong>
+          <b>↗</b>
+        </a>
+        <a href="#process">
+          <span>05</span>
+          <strong data-copy-en="Process" data-copy-ar="الخطوات">Process</strong>
+          <b>↗</b>
+        </a>
+        <a href="#project-form">
+          <span>06</span>
+          <strong data-copy-en="Contact" data-copy-ar="تواصل">Contact</strong>
+          <b>↗</b>
+        </a>
+      </nav>
+
+      <div class="mobile-menu-foot">
+        <a href="mailto:alzaym.digital@gmail.com">alzaym.digital@gmail.com</a>
+        <a href="https://wa.me/966596100109" target="_blank" rel="noopener">WhatsApp ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-ambient hero-ambient-a" aria-hidden="true"></div>
+      <div class="hero-ambient hero-ambient-b" aria-hidden="true"></div>
+
       <div class="hero-copy">
-        <p>CONTEMPORARY SAUDI DINING</p>
-        <h1>TASTE<br><em>AFTER DARK.</em></h1>
-        <div class="hero-bottom">
-          <span>Seasonal ingredients. Familiar flavours. A darker point of view.</span>
-          <a href="#menu">EXPLORE THE MENU ↓</a>
-        </div>
-      </div>
-    </section>
+        <p class="eyebrow reveal"
+           data-copy-en="INDEPENDENT DIGITAL STUDIO · SAUDI ARABIA"
+           data-copy-ar="استوديو رقمي مستقل · المملكة العربية السعودية">
+          INDEPENDENT DIGITAL STUDIO · SAUDI ARABIA
+        </p>
 
-    <section class="intro">
-      <div class="section-number">01 / NOIR</div>
-      <div class="intro-content">
-        <h2>ROOTED HERE.<br><em>REIMAGINED NOW.</em></h2>
-        <p>NOIR is a contemporary Saudi dining concept inspired by open fire, local ingredients and the generosity of the table.</p>
-        <p dir="rtl" lang="ar">مطعم سعودي معاصر يعيد تقديم النكهات المألوفة بروح حديثة وتجربة داكنة وأنيقة.</p>
-      </div>
-    </section>
+        <h1 class="hero-title" aria-label="We create digital experiences">
+          <span class="title-mask"><span data-copy-en="WE CREATE" data-copy-ar="نصنع">WE CREATE</span></span>
+          <span class="title-mask"><span data-copy-en="DIGITAL" data-copy-ar="تجارب">DIGITAL</span></span>
+          <span class="title-mask serif"><em data-copy-en="Experiences." data-copy-ar="رقمية.">Experiences.</em></span>
+        </h1>
 
-    <section class="image-break">
-      <img src="https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=2000&q=88" alt="Chef plating a refined dish" />
-      <div class="image-break-text">
-        <span>OPEN FIRE · LOCAL FLAVOURS · LATE NIGHTS</span>
-        <strong>NOT TRADITIONAL.<br>STILL OURS.</strong>
-      </div>
-    </section>
+        <p class="hero-description reveal"
+           data-copy-en="Premium websites, e-commerce and digital products shaped around your brand — designed to feel distinctive, useful and memorable."
+           data-copy-ar="نصمم مواقع ومتاجر ومنتجات رقمية راقية مبنية حول هوية مشروعك، لتكون مميزة وعملية وسهلة التذكر.">
+          Premium websites, e-commerce and digital products shaped around your brand — designed to feel distinctive, useful and memorable.
+        </p>
 
-    <section class="menu-section" id="menu">
-      <div class="menu-heading">
-        <div>
-          <span class="section-number">02 / MENU</span>
-          <h2>THE MENU<br><em>CHANGES WITH THE MOOD.</em></h2>
-        </div>
-        <div class="menu-meta">
-          <p id="menuDescription">A contemporary Saudi lunch menu built around familiar flavours, generous portions and modern presentation.</p>
-          <strong id="menuHours">LUNCH · 12:00 — 5:00 PM</strong>
+        <div class="hero-actions reveal">
+          <a class="primary-cta" href="#work"
+             data-copy-en="Explore what we can build"
+             data-copy-ar="اكتشف ما يمكننا بناؤه">
+            Explore what we can build
+          </a>
+
+          <a class="text-cta" href="#project-form"
+             data-copy-en="Start a project ↗"
+             data-copy-ar="ابدأ مشروعك ↗">
+            Start a project ↗
+          </a>
         </div>
       </div>
 
-      <div class="menu-tabs" role="tablist" aria-label="Choose menu">
-        <button class="menu-switch active" type="button" data-menu="lunch">LUNCH</button>
-        <button class="menu-switch" type="button" data-menu="dinner">DINNER</button>
-      </div>
+      <div class="gateway" id="gateway" aria-hidden="true">
+        <div class="gateway-orbit orbit-one"></div>
+        <div class="gateway-orbit orbit-two"></div>
 
-      <div class="menu-panel active" data-menu-panel="lunch">
-        <article class="food-item menu-item" data-id="jareesh" data-name="Smoked Jareesh" data-name-ar="جريش مدخن" data-price="48">
-          <div class="food-number">01</div>
-          <div class="food-info"><h3>SMOKED JAREESH</h3><p class="food-ar" dir="rtl">جريش مدخن</p><small>Brown butter · charred onion · herbs</small></div>
-          <div class="food-action"><strong>48 SAR</strong><button class="add-to-cart" type="button">ADD +</button></div>
-          <img class="menu-preview" src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80" alt="Smoked jareesh concept dish" />
-        </article>
-        <article class="food-item menu-item" data-id="kabsa" data-name="Fire-Grilled Kabsa" data-name-ar="كبسة على النار" data-price="74">
-          <div class="food-number">02</div>
-          <div class="food-info"><h3>FIRE-GRILLED KABSA</h3><p class="food-ar" dir="rtl">كبسة على النار</p><small>Smoked chicken · saffron rice · tomato jus</small></div>
-          <div class="food-action"><strong>74 SAR</strong><button class="add-to-cart" type="button">ADD +</button></div>
-          <img class="menu-preview" src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=80" alt="Rice and grilled chicken concept dish" />
-        </article>
-        <article class="food-item menu-item" data-id="lamb" data-name="Najdi Lamb" data-name-ar="لحم نجدي" data-price="96">
-          <div class="food-number">03</div>
-          <div class="food-info"><h3>NAJDI LAMB</h3><p class="food-ar" dir="rtl">لحم نجدي</p><small>Slow lamb · black lime · roasted roots</small></div>
-          <div class="food-action"><strong>96 SAR</strong><button class="add-to-cart" type="button">ADD +</button></div>
-          <img class="menu-preview" src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80" alt="Lamb concept dish" />
-        </article>
-        <article class="food-item menu-item" data-id="date" data-name="Date & Tahini" data-name-ar="تمر وطحينة" data-price="39">
-          <div class="food-number">04</div>
-          <div class="food-info"><h3>DATE & TAHINI</h3><p class="food-ar" dir="rtl">تمر وطحينة</p><small>Warm dates · sesame · salted caramel</small></div>
-          <div class="food-action"><strong>39 SAR</strong><button class="add-to-cart" type="button">ADD +</button></div>
-          <img class="menu-preview" src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=900&q=80" alt="Date dessert concept" />
-        </article>
-      </div>
+        <div class="gateway-stage" id="gatewayStage">
+          <div class="device">
+            <div class="device-cap">
+              <span>ALZAYM.</span>
+              <i></i>
+            </div>
 
-      <div class="menu-panel" data-menu-panel="dinner">
-        <article class="food-item menu-item" data-id="maqluba" data-name="Black Maqluba" data-name-ar="مقلوبة نوير" data-price="82">
-          <div class="food-number">01</div>
-          <div class="food-info"><h3>BLACK MAQLUBA</h3><p class="food-ar" dir="rtl">مقلوبة نوير</p><small>Short rib · aubergine · smoked yoghurt</small></div>
-          <div class="food-action"><strong>82 SAR</strong><button class="add-to-cart" type="button">ADD +</button></div>
-          <img class="menu-preview" src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=80" alt="Dinner rice concept dish" />
-        </article>
-        <article class="food-item menu-item" data-id="sea-bass" data-name="Red Sea Bass" data-name-ar="قاروص البحر الأحمر" data-price="110">
-          <div class="food-number">02</div>
-          <div class="food-info"><h3>RED SEA BASS</h3><p class="food-ar" dir="rtl">قاروص البحر الأحمر</p><small>Coal-roasted fish · citrus · green chilli</small></div>
-          <div class="food-action"><strong>110 SAR</strong><button class="add-to-cart" type="button">ADD +</button></div>
-          <img class="menu-preview" src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=900&q=80" alt="Grilled fish concept dish" />
-        </article>
-        <article class="food-item menu-item" data-id="tenderloin" data-name="Desert Tenderloin" data-name-ar="تندرلوين الصحراء" data-price="128">
-          <div class="food-number">03</div>
-          <div class="food-info"><h3>DESERT TENDERLOIN</h3><p class="food-ar" dir="rtl">تندرلوين الصحراء</p><small>Beef · date glaze · smoked pepper</small></div>
-          <div class="food-action"><strong>128 SAR</strong><button class="add-to-cart" type="button">ADD +</button></div>
-          <img class="menu-preview" src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=900&q=80" alt="Tenderloin concept dish" />
-        </article>
-        <article class="food-item menu-item" data-id="saffron" data-name="Saffron Milk" data-name-ar="حليب الزعفران" data-price="42">
-          <div class="food-number">04</div>
-          <div class="food-info"><h3>SAFFRON MILK</h3><p class="food-ar" dir="rtl">حليب الزعفران</p><small>Saffron custard · cardamom · pistachio</small></div>
-          <div class="food-action"><strong>42 SAR</strong><button class="add-to-cart" type="button">ADD +</button></div>
-          <img class="menu-preview" src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=900&q=80" alt="Saffron dessert concept" />
-        </article>
-      </div>
+            <div class="device-screen">
+              <div class="screen-head">
+                <span>DIGITAL STUDIO</span>
+                <small>2026</small>
+              </div>
 
-      <aside class="cart-shell" aria-label="Shopping cart">
-        <div class="cart-head"><div><span>YOUR ORDER</span><strong><b id="cartCount">0</b> ITEMS</strong></div><button id="clearCart" type="button">CLEAR</button></div>
-        <div id="cartItems"></div>
-        <div class="cart-foot"><span>TOTAL</span><strong><b id="cartTotal">0</b> SAR</strong></div>
-        <button class="checkout" id="checkoutButton" type="button" disabled>CONTINUE ORDER →</button>
-      </aside>
-    </section>
+              <div class="screen-title">ALZAYM</div>
+              <div class="screen-rule"></div>
 
-    <section class="experience" id="experience">
-      <div class="experience-content">
-        <span class="section-number">03 / EXPERIENCE</span>
-        <h2>CHOOSE<br><em>YOUR TABLE.</em></h2>
-        <p>A small interactive floor concept. Select an available table and send the reservation request directly through WhatsApp.</p>
-      </div>
-      <div class="restaurant-scene" id="restaurantScene">
-        <div class="restaurant-floor">
-          <div class="floor-label kitchen">KITCHEN</div>
-          <div class="floor-label window">CITY VIEW</div>
-          <button class="table available t1" type="button" data-table="01" data-guests="2" data-location="Window" data-view="City View">01</button>
-          <button class="table available t2" type="button" data-table="02" data-guests="4" data-location="Main Hall" data-view="Open Kitchen">02</button>
-          <button class="table unavailable t3" type="button" disabled>03</button>
-          <button class="table available t4" type="button" data-table="04" data-guests="4" data-location="Corner" data-view="Private">04</button>
-          <button class="table available t5" type="button" data-table="05" data-guests="6" data-location="Main Hall" data-view="Central">05</button>
-        </div>
-      </div>
-      <div class="reservation-card">
-        <span id="tableStatus">SELECT A TABLE</span>
-        <strong id="selectedTable">TABLE —</strong>
-        <div><span id="selectedGuests">— Guests</span><span id="selectedLocation">—</span><span id="selectedView">—</span></div>
-        <button id="confirmTable" type="button" disabled>RESERVE ON WHATSAPP ↗</button>
-      </div>
-    </section>
+              <div class="screen-projects">
+                <div class="mini-project mini-noir">
+                  <small>01</small><strong>NOIR</strong><span>Restaurant</span>
+                </div>
+                <div class="mini-project mini-sou">
+                  <small>02</small><strong>SOU</strong><span>Café</span>
+                </div>
+                <div class="mini-project mini-aurelia">
+                  <small>03</small><strong>AURELIA</strong><span>Hotel</span>
+                </div>
+              </div>
 
-    <section class="reservation" id="reservation">
-      <span class="section-number">04 / RESERVATION</span>
-      <h2>MAKE THE NIGHT<br><em>YOURS.</em></h2>
-      <a href="#experience">CHOOSE YOUR TABLE ↑</a>
-    </section>
-
-    <section class="ordering" id="order">
-      <span class="section-number">05 / ORDER FROM NOIR</span>
-      <div class="ordering-heading">
-        <h2>EAT HERE.<br><em>OR ANYWHERE.</em></h2>
-        <p>Choose delivery or pickup, then send your order directly to us.</p>
-      </div>
-
-      <div class="order-methods">
-        <button class="order-method active" type="button" data-order-method="delivery"><span>01</span><strong>DELIVERY</strong><small>To your address</small></button>
-        <button class="order-method" type="button" data-order-method="pickup"><span>02</span><strong>PICKUP</strong><small>From the restaurant</small></button>
-      </div>
-
-      <div class="order-form">
-        <div class="order-summary-title"><span>ORDER TYPE</span><strong id="orderType">Home Delivery</strong></div>
-
-        <div class="delivery-fields active">
-          <label>DELIVERY ADDRESS<input id="deliveryAddress" type="text" placeholder="District, street, building..." /></label>
-          <label>MOBILE NUMBER<input id="deliveryPhone" type="tel" placeholder="05xxxxxxxx" /></label>
-        </div>
-
-        <div class="pickup-fields">
-          <label>BRANCH<select id="pickupBranch"><option>Riyadh — King Fahd Road</option><option>Riyadh — Olaya</option></select></label>
-          <label>PICKUP TIME<select id="pickupTime"><option>As soon as possible</option><option>In 30 minutes</option><option>In 60 minutes</option></select></label>
-        </div>
-
-        <div class="payment-block">
-          <span>PAYMENT METHOD</span>
-          <div class="payment-options">
-            <label><input type="radio" name="payment" value="Apple Pay" checked /> Apple Pay</label>
-            <label><input type="radio" name="payment" value="Mada" /> Mada</label>
-            <label><input type="radio" name="payment" value="Visa / Mastercard" /> Visa / Mastercard</label>
-            <label><input type="radio" name="payment" value="Cash" /> Cash</label>
-            <label><input type="radio" name="payment" value="WhatsApp" /> WhatsApp</label>
+              <div class="screen-footer">
+                <span>SELECTED EXPERIENCES</span>
+                <span>SCROLL ↓</span>
+              </div>
+            </div>
           </div>
-          <small>Demo interface — no live payment gateway is connected.</small>
+
+          <div class="glass-tag tag-one">
+            <small>WEB DESIGN</small>
+            <strong>Editorial</strong>
+          </div>
+
+          <div class="glass-tag tag-two">
+            <small>E-COMMERCE</small>
+            <strong>Useful</strong>
+          </div>
+
+          <div class="glass-tag tag-three">
+            <small>DIGITAL CRAFT</small>
+            <strong>Distinctive</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-bottomline">
+        <span>WEB DESIGN · E-COMMERCE · DIGITAL EXPERIENCES</span>
+        <span>ALZAYM / 2026</span>
+      </div>
+    </section>
+
+    <section class="marquee" aria-label="ALZAYM services">
+      <div class="marquee-track">
+        <span>WEB DESIGN</span><i>✦</i>
+        <span>E-COMMERCE</span><i>✦</i>
+        <span>DIGITAL EXPERIENCES</span><i>✦</i>
+        <span>INTERACTIVE DESIGN</span><i>✦</i>
+        <span>BUSINESS SYSTEMS</span><i>✦</i>
+        <span>WEB DEVELOPMENT</span><i>✦</i>
+
+        <span>WEB DESIGN</span><i>✦</i>
+        <span>E-COMMERCE</span><i>✦</i>
+        <span>DIGITAL EXPERIENCES</span><i>✦</i>
+        <span>INTERACTIVE DESIGN</span><i>✦</i>
+        <span>BUSINESS SYSTEMS</span><i>✦</i>
+        <span>WEB DEVELOPMENT</span><i>✦</i>
+      </div>
+    </section>
+
+    <section class="studio-intro page-section" id="studio">
+      <div class="section-index">01</div>
+
+      <div class="intro-heading">
+        <p class="section-kicker"
+           data-copy-en="WHAT WE BELIEVE"
+           data-copy-ar="فلسفتنا">WHAT WE BELIEVE</p>
+
+        <h2 class="section-title reveal">
+          <span data-copy-en="NOT JUST" data-copy-ar="ليس مجرد">NOT JUST</span>
+          <em data-copy-en="another website." data-copy-ar="موقع آخر.">another website.</em>
+        </h2>
+      </div>
+
+      <p class="section-copy reveal"
+         data-copy-en="We design digital experiences with a clear point of view. Every page, interaction and transition should feel intentional — never generic, never copied, never made just to fill space."
+         data-copy-ar="نصمم التجربة الرقمية برؤية واضحة. كل صفحة وحركة وانتقال لها سبب، بعيدًا عن القوالب المكررة والتفاصيل التي لا تخدم المشروع.">
+        We design digital experiences with a clear point of view. Every page, interaction and transition should feel intentional — never generic, never copied, never made just to fill space.
+      </p>
+    </section>
+
+    <section class="services-section page-section" id="services">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">02 / SERVICES</span>
+          <h2 class="section-title reveal">
+            <span data-copy-en="WHAT WE" data-copy-ar="ماذا">WHAT WE</span>
+            <em data-copy-en="build." data-copy-ar="نبني.">build.</em>
+          </h2>
         </div>
 
-        <button class="send-order" id="sendWhatsappOrder" type="button">SEND ORDER ON WHATSAPP ↗</button>
+        <p data-copy-en="Focused digital services for businesses that care about how they look, feel and perform online."
+           data-copy-ar="خدمات رقمية مركزة للمشاريع التي تهتم بالشكل والتجربة والأداء على الإنترنت.">
+          Focused digital services for businesses that care about how they look, feel and perform online.
+        </p>
       </div>
+
+      <div class="service-grid">
+        <article class="service-card reveal">
+          <span class="service-number">01</span>
+          <div>
+            <h3 data-copy-en="Websites" data-copy-ar="المواقع">Websites</h3>
+            <p data-copy-en="Custom websites with strong visual direction, responsive layouts and purposeful interactions."
+               data-copy-ar="مواقع مخصصة بهوية بصرية قوية، تصميم متجاوب وتفاعلات مدروسة.">
+              Custom websites with strong visual direction, responsive layouts and purposeful interactions.
+            </p>
+          </div>
+          <b>↗</b>
+        </article>
+
+        <article class="service-card reveal">
+          <span class="service-number">02</span>
+          <div>
+            <h3 data-copy-en="E-commerce" data-copy-ar="المتاجر الإلكترونية">E-commerce</h3>
+            <p data-copy-en="Online stores designed around browsing, trust, checkout and a smoother buying experience."
+               data-copy-ar="متاجر إلكترونية مبنية حول سهولة التصفح والثقة والدفع وتجربة شراء أفضل.">
+              Online stores designed around browsing, trust, checkout and a smoother buying experience.
+            </p>
+          </div>
+          <b>↗</b>
+        </article>
+
+        <article class="service-card reveal">
+          <span class="service-number">03</span>
+          <div>
+            <h3 data-copy-en="Digital systems" data-copy-ar="الأنظمة الرقمية">Digital systems</h3>
+            <p data-copy-en="Useful digital tools for ordering, loyalty, delivery, dashboards and business workflows."
+               data-copy-ar="أدوات رقمية عملية للطلبات والولاء والتوصيل ولوحات التحكم وسير العمل.">
+              Useful digital tools for ordering, loyalty, delivery, dashboards and business workflows.
+            </p>
+          </div>
+          <b>↗</b>
+        </article>
+      </div>
+    </section>
+
+
+    <section class="capabilities-section page-section" id="capabilities">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">03 / DIGITAL CRAFT</span>
+          <h2 class="section-title reveal">
+            <span data-copy-en="BUILT WITH" data-copy-ar="مصمم">BUILT WITH</span>
+            <em data-copy-en="intention." data-copy-ar="بعناية.">intention.</em>
+          </h2>
+        </div>
+        <p
+          data-copy-en="A few principles behind every ALZAYM experience: original direction, responsive execution and motion that has a purpose."
+          data-copy-ar="ثلاثة مبادئ خلف كل تجربة من ALZAYM: اتجاه بصري أصلي، تنفيذ متجاوب، وحركة لها وظيفة واضحة.">
+          A few principles behind every ALZAYM experience: original direction, responsive execution and motion that has a purpose.
+        </p>
+      </div>
+
+      <div class="glow-card-grid">
+        <article class="glow-feature reveal" style="--card-gradient:linear-gradient(137deg,#C66A43 0%,#D9A37B 48%,#B79762 100%)">
+          <div class="glow-feature-aura"></div>
+          <div class="glow-feature-card">
+            <div class="glow-icon" aria-hidden="true">↗</div>
+            <div>
+              <h3 data-copy-en="Original direction" data-copy-ar="اتجاه أصلي">Original direction</h3>
+              <p data-copy-en="No recycled AI look. Every project gets its own composition, typography and visual system."
+                 data-copy-ar="لا نعتمد مظهرًا مكررًا. كل مشروع يحصل على تكوين وخطوط ونظام بصري يناسب هويته.">
+                No recycled AI look. Every project gets its own composition, typography and visual system.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="glow-feature reveal" style="--card-gradient:linear-gradient(137deg,#F2EEE6 0%,#B79762 46%,#747963 100%)">
+          <div class="glow-feature-aura"></div>
+          <div class="glow-feature-card">
+            <div class="glow-icon" aria-hidden="true">◇</div>
+            <div>
+              <h3 data-copy-en="Every screen" data-copy-ar="لكل شاشة">Every screen</h3>
+              <p data-copy-en="Desktop, tablet and mobile are designed as one experience — not a desktop page squeezed smaller."
+                 data-copy-ar="الكمبيوتر والجهاز اللوحي والجوال تُصمم كتجربة واحدة، وليس مجرد تصغير لصفحة الكمبيوتر.">
+                Desktop, tablet and mobile are designed as one experience — not a desktop page squeezed smaller.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="glow-feature reveal" style="--card-gradient:linear-gradient(137deg,#747963 0%,#AFA07B 48%,#C66A43 100%)">
+          <div class="glow-feature-aura"></div>
+          <div class="glow-feature-card">
+            <div class="glow-icon" aria-hidden="true">✦</div>
+            <div>
+              <h3 data-copy-en="Motion with purpose" data-copy-ar="حركة لها هدف">Motion with purpose</h3>
+              <p data-copy-en="Depth, hover and scroll transitions guide attention without turning the site into a visual distraction."
+                 data-copy-ar="العمق والهوفر وحركات التمرير توجه الانتباه بدون أن تتحول التجربة إلى تشتيت بصري.">
+                Depth, hover and scroll transitions guide attention without turning the site into a visual distraction.
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="pricing-section page-section" id="pricing">
+      <div class="section-head pricing-head">
+        <div>
+          <span class="section-kicker">04 / PRICING</span>
+          <h2 class="section-title reveal">
+            <span data-copy-en="CLEAR START." data-copy-ar="بداية واضحة.">CLEAR START.</span>
+            <em data-copy-en="Fair pricing." data-copy-ar="وسعر منطقي.">Fair pricing.</em>
+          </h2>
+        </div>
+        <p
+          data-copy-en="Simple starting prices for common projects. Final scope depends on pages, features, content and integrations."
+          data-copy-ar="أسعار بداية واضحة للمشاريع الشائعة. السعر النهائي يعتمد على عدد الصفحات والخصائص والمحتوى والربط المطلوب.">
+          Simple starting prices for common projects. Final scope depends on pages, features, content and integrations.
+        </p>
+      </div>
+
+      <div class="pricing-list">
+        <article class="price-row reveal">
+          <span class="price-index">01</span>
+          <div class="price-name">
+            <small data-copy-en="STARTER" data-copy-ar="البداية">STARTER</small>
+            <h3 data-copy-en="Professional Website" data-copy-ar="موقع احترافي">Professional Website</h3>
+            <p data-copy-en="A polished website for a personal brand, service or small business."
+               data-copy-ar="موقع احترافي للعلامة الشخصية أو الخدمات أو المشاريع الصغيرة.">
+              A polished website for a personal brand, service or small business.
+            </p>
+          </div>
+          <div class="price-amount"><strong>525</strong><span>SAR</span></div>
+          <a href="#project-form" class="price-action">START ↗</a>
+        </article>
+
+        <article class="price-row featured reveal">
+          <span class="price-index">02</span>
+          <div class="price-name">
+            <small data-copy-en="COMMERCE" data-copy-ar="المتجر">COMMERCE</small>
+            <h3 data-copy-en="E-commerce Store" data-copy-ar="متجر إلكتروني">E-commerce Store</h3>
+            <p data-copy-en="A complete online store experience for products, ordering and payments."
+               data-copy-ar="تجربة متجر إلكتروني متكاملة للمنتجات والطلبات وخيارات الدفع.">
+              A complete online store experience for products, ordering and payments.
+            </p>
+          </div>
+          <div class="price-amount"><strong>929</strong><span>SAR</span></div>
+          <a href="#project-form" class="price-action">START ↗</a>
+        </article>
+
+        <article class="price-row reveal">
+          <span class="price-index">03</span>
+          <div class="price-name">
+            <small data-copy-en="ADVANCED" data-copy-ar="المتقدم">ADVANCED</small>
+            <h3 data-copy-en="App / Business System" data-copy-ar="تطبيق / نظام أعمال">App / Business System</h3>
+            <p data-copy-en="A starting point for dashboards, ordering systems, internal tools and custom web apps."
+               data-copy-ar="سعر بداية للوحات التحكم وأنظمة الطلب والأدوات الداخلية وتطبيقات الويب المخصصة.">
+              A starting point for dashboards, ordering systems, internal tools and custom web apps.
+            </p>
+          </div>
+          <div class="price-amount"><strong>1,424</strong><span>SAR</span></div>
+          <a href="#project-form" class="price-action">START ↗</a>
+        </article>
+      </div>
+
+      <p class="pricing-note"
+         data-copy-en="Starting prices — custom features, payment gateways, advanced automation and large content scopes are quoted separately."
+         data-copy-ar="هذه أسعار بداية — الخصائص المخصصة وبوابات الدفع والأتمتة المتقدمة والمحتوى الكبير تُسعّر حسب نطاق المشروع.">
+        Starting prices — custom features, payment gateways, advanced automation and large content scopes are quoted separately.
+      </p>
+    </section>
+
+    <section class="work-section page-section" id="work">
+      <div class="section-head work-head">
+        <div>
+          <span class="section-kicker">05 / SELECTED EXPERIENCES</span>
+          <h2 class="section-title reveal">
+            <span data-copy-en="EXPLORE WHAT" data-copy-ar="اكتشف ما">EXPLORE WHAT</span>
+            <em data-copy-en="we can build." data-copy-ar="يمكننا بناؤه.">we can build.</em>
+          </h2>
+        </div>
+
+        <p data-copy-en="Three concept experiences showing how different industries can feel completely different — without losing clarity or usability."
+           data-copy-ar="ثلاث تجارب تصورية توضح كيف يمكن لكل نشاط أن يمتلك هوية مختلفة تمامًا دون التضحية بالوضوح وسهولة الاستخدام.">
+          Three concept experiences showing how different industries can feel completely different — without losing clarity or usability.
+        </p>
+      </div>
+
+      <div class="project-list">
+        <a class="project-card project-noir reveal" data-project="NOIR" href="./demos/noir/index.html" aria-label="Open NOIR restaurant concept">
+          <div class="project-visual">
+            <div class="project-poster">
+              <span>NOIR.</span>
+              <small>RESTAURANT EXPERIENCE</small>
+              <div class="poster-lines"><i></i><i></i><i></i></div>
+            </div>
+            <div class="project-glass">
+              <small>01 / RESTAURANT</small>
+              <strong>NOIR</strong>
+              <span>Concept experience</span>
+            </div>
+          </div>
+
+          <div class="project-meta">
+            <div><span>01 / RESTAURANT</span><h3>NOIR</h3></div>
+            <p>Website · Ordering · Reservation</p>
+            <span class="project-action" data-copy-en="VIEW EXPERIENCE ↗" data-copy-ar="عرض التجربة ↗">VIEW EXPERIENCE ↗</span>
+          </div>
+        </a>
+
+        <a class="project-card project-sou reveal" data-project="SOU" href="./demos/sou/index.html" aria-label="Open SOU café concept">
+          <div class="project-visual">
+            <div class="project-poster">
+              <span>SOU.</span>
+              <small>SPECIALTY CAFÉ EXPERIENCE</small>
+              <div class="poster-circles"><i></i><i></i><i></i></div>
+            </div>
+            <div class="project-glass">
+              <small>02 / CAFÉ</small>
+              <strong>SOU</strong>
+              <span>Concept experience</span>
+            </div>
+          </div>
+
+          <div class="project-meta">
+            <div><span>02 / CAFÉ</span><h3>SOU</h3></div>
+            <p>Menu · Tables · Delivery</p>
+            <span class="project-action" data-copy-en="VIEW EXPERIENCE ↗" data-copy-ar="عرض التجربة ↗">VIEW EXPERIENCE ↗</span>
+          </div>
+        </a>
+
+        <a class="project-card project-aurelia reveal" data-project="AURELIA" href="./demos/aurelia/index.html" aria-label="Open AURELIA hotel concept">
+          <div class="project-visual">
+            <div class="project-poster">
+              <span>AURELIA.</span>
+              <small>FIVE-STAR HOSPITALITY</small>
+              <div class="hotel-lines"><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="project-glass">
+              <small>03 / HOSPITALITY</small>
+              <strong>AURELIA GRAND</strong>
+              <span>Concept experience</span>
+            </div>
+          </div>
+
+          <div class="project-meta">
+            <div><span>03 / HOSPITALITY</span><h3>AURELIA GRAND</h3></div>
+            <p>Rooms · Dining · Wellness · Services</p>
+            <span class="project-action" data-copy-en="VIEW EXPERIENCE ↗" data-copy-ar="عرض التجربة ↗">VIEW EXPERIENCE ↗</span>
+          </div>
+        </a>
+      </div>
+
+      <p class="demo-note"
+         data-copy-en="Concept projects created to demonstrate ALZAYM's design and development capabilities."
+         data-copy-ar="مشاريع تصورية صُممت لعرض قدرات ALZAYM في التصميم والتطوير.">
+        Concept projects created to demonstrate ALZAYM's design and development capabilities.
+      </p>
+    </section>
+
+    <section class="process-section page-section" id="process">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">06 / PROCESS</span>
+          <h2 class="section-title reveal">
+            <span data-copy-en="FROM IDEA" data-copy-ar="من الفكرة">FROM IDEA</span>
+            <em data-copy-en="to launch." data-copy-ar="إلى الإطلاق.">to launch.</em>
+          </h2>
+        </div>
+
+        <p data-copy-en="A simple process designed to keep decisions clear and execution focused."
+           data-copy-ar="عملية واضحة تحافظ على القرارات بسيطة والتنفيذ مركزًا.">
+          A simple process designed to keep decisions clear and execution focused.
+        </p>
+      </div>
+
+      <div class="process-grid">
+        <article class="reveal">
+          <span>01</span>
+          <h3 data-copy-en="Discover" data-copy-ar="نفهم">Discover</h3>
+          <p data-copy-en="We learn how your business works, what your customers need and what the site must achieve."
+             data-copy-ar="نفهم طريقة عمل نشاطك واحتياجات عملائك وما الذي يجب أن يحققه الموقع.">
+            We learn how your business works, what your customers need and what the site must achieve.
+          </p>
+        </article>
+
+        <article class="reveal">
+          <span>02</span>
+          <h3 data-copy-en="Direct" data-copy-ar="نحدد الاتجاه">Direct</h3>
+          <p data-copy-en="We define the visual direction, structure, content priorities and interactions before building."
+             data-copy-ar="نحدد الاتجاه البصري والهيكل وأولوية المحتوى والتفاعلات قبل التنفيذ.">
+            We define the visual direction, structure, content priorities and interactions before building.
+          </p>
+        </article>
+
+        <article class="reveal">
+          <span>03</span>
+          <h3 data-copy-en="Build" data-copy-ar="نبني">Build</h3>
+          <p data-copy-en="We design and develop the experience with responsive behavior, polish and performance in mind."
+             data-copy-ar="نصمم ونطور التجربة مع الاهتمام بالتجاوب والجودة والأداء.">
+            We design and develop the experience with responsive behavior, polish and performance in mind.
+          </p>
+        </article>
+
+        <article class="reveal">
+          <span>04</span>
+          <h3 data-copy-en="Launch" data-copy-ar="نطلق">Launch</h3>
+          <p data-copy-en="We connect the final details, test the experience and prepare it for real customers."
+             data-copy-ar="نربط التفاصيل النهائية ونختبر التجربة ونجهزها للعملاء الحقيقيين.">
+            We connect the final details, test the experience and prepare it for real customers.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="project-form-section page-section" id="project-form">
+      <div class="form-copy">
+        <span class="section-kicker">07 / START A PROJECT</span>
+        <h2 class="section-title reveal">
+          <span data-copy-en="LET'S BUILD" data-copy-ar="لنصنع">LET'S BUILD</span>
+          <em data-copy-en="something distinct." data-copy-ar="شيئًا مميزًا.">something distinct.</em>
+        </h2>
+
+        <p data-copy-en="Tell us what you are building. We will use your answers to understand the right direction before we talk."
+           data-copy-ar="أخبرنا عمّا تريد بناءه، وسنستخدم إجاباتك لفهم الاتجاه المناسب قبل التواصل.">
+          Tell us what you are building. We will use your answers to understand the right direction before we talk.
+        </p>
+      </div>
+
+      <form id="clientForm" class="project-form">
+        <div class="form-row">
+          <label>
+            <span data-copy-en="Your name" data-copy-ar="اسمك">Your name</span>
+            <input type="text" id="name" placeholder="Mohammed" required>
+          </label>
+
+          <label>
+            <span data-copy-en="Phone number" data-copy-ar="رقم التواصل">Phone number</span>
+            <input type="tel" id="phone" placeholder="05xxxxxxxx" required>
+          </label>
+        </div>
+
+        <label>
+          <span data-copy-en="Project type" data-copy-ar="نوع المشروع">Project type</span>
+          <select id="service" required>
+            <option value="">Choose a project type</option>
+            <option value="موقع إلكتروني احترافي">Professional website</option>
+            <option value="متجر إلكتروني">Online store</option>
+            <option value="نظام مبيعات وكاشير">POS & sales system</option>
+            <option value="نظام مخزون وولاء">Inventory & loyalty system</option>
+            <option value="تطبيق أو منصة">App or platform</option>
+            <option value="طلبات وتوصيل">Ordering & delivery</option>
+            <option value="مشروع آخر">Other</option>
+          </select>
+        </label>
+
+        <label>
+          <span data-copy-en="Estimated budget" data-copy-ar="الميزانية التقريبية">Estimated budget</span>
+          <select id="budget" required>
+            <option value="">Choose a package / budget</option>
+            <option value="525 ريال — موقع احترافي">Professional Website — 525 SAR</option>
+            <option value="929 ريال — متجر إلكتروني">E-commerce Store — 929 SAR</option>
+            <option value="1424 ريال — تطبيق / نظام أعمال">App / Business System — 1,424 SAR</option>
+            <option value="مشروع مخصص — طلب تسعير">Custom Project — Request Quote</option>
+          </select>
+        </label>
+
+        <label>
+          <span data-copy-en="Tell us about your project" data-copy-ar="حدثنا عن مشروعك">Tell us about your project</span>
+          <textarea id="details" placeholder="What do you want to build?" required></textarea>
+        </label>
+
+        <button class="submit-project" type="submit">
+          <span data-copy-en="Send project request" data-copy-ar="أرسل طلب المشروع">Send project request</span>
+          <b>↗</b>
+        </button>
+
+        <p class="form-status" id="formStatus" aria-live="polite"></p>
+      </form>
     </section>
   </main>
 
-  <footer>
-    <div class="footer-logo">NOIR<span>.</span></div>
-    <div class="footer-grid"><span>CONTEMPORARY SAUDI DINING</span><span>RIYADH · SAUDI ARABIA</span><a href="#top">BACK TO TOP ↑</a></div>
+  <footer class="site-footer">
+    <div class="footer-brand footer-logo"><img src="alzaym-logo.png.png" alt="ALZAYM Digital Studio"></div>
+
+    <div class="footer-copy">
+      <span>DIGITAL STUDIO · SAUDI ARABIA</span>
+      <a href="mailto:alzaym.digital@gmail.com">alzaym.digital@gmail.com</a>
+      <a href="https://wa.me/966596100109" target="_blank" rel="noopener">+966 59 610 0109</a>
+    </div>
+
+
+    <div class="footer-social-row">
+      <span>FOLLOW ALZAYM</span>
+      <div class="social-links social-links-footer" aria-label="Social media">
+        <a class="social-icon" href="https://www.instagram.com/alzaym.digital" target="_blank" rel="noopener noreferrer" aria-label="ALZAYM on Instagram" title="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect>
+            <circle cx="12" cy="12" r="4"></circle>
+            <circle class="fill-dot" cx="17.4" cy="6.7" r="1"></circle>
+          </svg>
+        </a>
+        <a class="social-icon" href="https://www.tiktok.com/@alzaym.digital" target="_blank" rel="noopener noreferrer" aria-label="ALZAYM on TikTok" title="TikTok">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14.2 4.2v10.1a4.6 4.6 0 1 1-3.7-4.5"></path>
+            <path d="M14.2 4.2c.7 2.2 2.2 3.7 4.5 4.3"></path>
+          </svg>
+        </a>
+        <a class="social-icon" href="https://x.com/alzaym_digital?s=11" target="_blank" rel="noopener noreferrer" aria-label="ALZAYM on X" title="X">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 4.5 19 19.5"></path>
+            <path d="M19 4.5 5 19.5"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 ALZAYM DIGITAL STUDIO</span>
+      <span>WEBSITES · E-COMMERCE · DIGITAL EXPERIENCES</span>
+    </div>
   </footer>
 
   <script src="script.js"></script>
